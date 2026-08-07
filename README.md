@@ -4,7 +4,7 @@
 
 [Adafruit Feather RP2040 with USB Type A Host](https://www.switch-science.com/products/8956)を使い、Logitech G600のマウス操作＆サイドボタンキー入力の両方を、Nintendo Switch 2版FF14で利用できるように変換する、非公式HID Remapper派生ファームウェアです。
 
-## [購入・書き込み・接続の手順はこちら](START_HERE.ja.md)
+## [機器・書き込み・接続の手順はこちら](START_HERE.ja.md)
 
 > [!CAUTION]
 > 個人が趣味で作った実験的なファームウェアです。Nintendo、スクウェア・エニックス、Logitech、Adafruit、本家HID Remapperによる公式提供・推奨ではありません。
