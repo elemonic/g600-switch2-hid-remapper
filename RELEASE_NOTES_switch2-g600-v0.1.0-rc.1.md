@@ -14,7 +14,7 @@ Short Switch 2 testing confirmed pointer movement, left/right/middle click, vert
 - `SHA256SUMS.txt` — SHA-256 integrity check
 - `THIRD_PARTY_LICENSES.tar.gz` — license notices accompanying the firmware
 
-See the [English guide](https://github.com/elemonic/hid-remapper/blob/switch2-g600/SWITCH2_G600.md) or [Japanese guide](https://github.com/elemonic/hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md) before flashing.
+See the [English guide](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.md) or [Japanese guide](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md) before flashing.
 
 To restore official firmware, use `remapper_feather.uf2` from the upstream [r2026-05-25 release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25).
 
@@ -28,4 +28,4 @@ Mouse、Keyboard、HID Remapper設定／Monitorを別々のHIDインターフェ
 
 短時間のSwitch 2試験では、カーソル、左右・中央クリック、縦ホイール、G600のF4／テンキー入力、USBハブ上の別キーボードが動作しました。FF14での長時間試験は未実施です。
 
-書き込み前に[日本語ガイド](https://github.com/elemonic/hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md)を確認してください。
+書き込み前に[日本語ガイド](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md)を確認してください。

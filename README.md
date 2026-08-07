@@ -26,7 +26,7 @@ Adafruit Feather RP2040 with USB Type A HostとG600を使った短時間の実�
 
 ## ダウンロードと技術情報
 
-- [v0.1.0-rc.1 Release](https://github.com/elemonic/hid-remapper/releases/tag/switch2-g600-v0.1.0-rc.1)
+- [v0.1.0-rc.1 Release](https://github.com/elemonic/g600-switch2-hid-remapper/releases/tag/switch2-g600-v0.1.0-rc.1)
 - [日本語の技術情報・ビルド手順](SWITCH2_G600.ja.md)
 - [Technical notes and build instructions](SWITCH2_G600.md)
 - [第三者ライセンス・通知](THIRD_PARTY_NOTICES.md)

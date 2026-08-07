@@ -43,7 +43,7 @@ Keyboard優先版は診断用です。Mouse優先版で両方の入力が通っ�
 
 ## UF2の書き込み
 
-このforkの[Releasesページ](https://github.com/elemonic/hid-remapper/releases)から`remapper_feather_switch2_g600.uf2`をダウンロードします。
+このforkの[Releasesページ](https://github.com/elemonic/g600-switch2-hid-remapper/releases)から`remapper_feather_switch2_g600.uf2`をダウンロードします。
 
 1. FeatherをSwitch 2から外します。
 2. FeatherのUSB-C側をPCへ接続します。
@@ -61,8 +61,8 @@ GitHubが自動生成するSource ZIP／TARにはサブモジュールの中身�
 
 ```bash
 git clone --branch switch2-g600 --recurse-submodules \
-  https://github.com/elemonic/hid-remapper.git
-cd hid-remapper
+  https://github.com/elemonic/g600-switch2-hid-remapper.git
+cd g600-switch2-hid-remapper
 ```
 
 CMake、Python 3、GNU Make、Arm GNU組み込みツールチェーン、Newlib、SRecordが必要です。Ubuntu／Debian系では通常、次のパッケージを使用します。

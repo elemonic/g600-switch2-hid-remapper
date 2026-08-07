@@ -41,7 +41,7 @@ The diagnostic `keyboard-first` build has not been tested because the recommende
 
 ## Installing the UF2
 
-Download `remapper_feather_switch2_g600.uf2` from this fork's [Releases page](https://github.com/elemonic/hid-remapper/releases).
+Download `remapper_feather_switch2_g600.uf2` from this fork's [Releases page](https://github.com/elemonic/g600-switch2-hid-remapper/releases).
 
 1. Disconnect the Feather from the Switch 2.
 2. Connect the Feather USB-C port to a computer.
@@ -59,8 +59,8 @@ GitHub-generated source ZIP and TAR archives do not contain submodule contents. 
 
 ```bash
 git clone --branch switch2-g600 --recurse-submodules \
-  https://github.com/elemonic/hid-remapper.git
-cd hid-remapper
+  https://github.com/elemonic/g600-switch2-hid-remapper.git
+cd g600-switch2-hid-remapper
 ```
 
 Install CMake, Python 3, GNU Make, the Arm GNU embedded toolchain, Newlib, and SRecord. On Ubuntu/Debian, the package names are typically:

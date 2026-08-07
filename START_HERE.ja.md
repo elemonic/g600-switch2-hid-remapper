@@ -35,7 +35,7 @@ G600をSwitch 2版FF14で使いたくて、個人が趣味で少し手を入れ�
 
 ## 1. ファームウェアをダウンロードする
 
-[`remapper_feather_switch2_g600.uf2`](https://github.com/elemonic/hid-remapper/releases/download/switch2-g600-v0.1.0-rc.1/remapper_feather_switch2_g600.uf2) をダウンロード
+[`remapper_feather_switch2_g600.uf2`](https://github.com/elemonic/g600-switch2-hid-remapper/releases/download/switch2-g600-v0.1.0-rc.1/remapper_feather_switch2_g600.uf2) をダウンロード
 
 <details>
 <summary>ハッシュの確認、ソースの確認・ビルド</summary>
@@ -64,7 +64,7 @@ Linuxでは次を実行します。
 sha256sum remapper_feather_switch2_g600.uf2
 ```
 
-Releaseにある`SHA256SUMS.txt`でも同じ値を確認できます。ソースを読んだり自分でビルドしたりする場合は、[この版のソースとビルド手順](https://github.com/elemonic/hid-remapper/blob/switch2-g600-v0.1.0-rc.1/SWITCH2_G600.ja.md#ソースからのビルド)へ進んでください。
+Releaseにある`SHA256SUMS.txt`でも同じ値を確認できます。ソースを読んだり自分でビルドしたりする場合は、[この版のソースとビルド手順](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600-v0.1.0-rc.1/SWITCH2_G600.ja.md#ソースからのビルド)へ進んでください。
 
 </details>
 

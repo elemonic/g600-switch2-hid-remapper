@@ -24,7 +24,7 @@ Extended gameplay, TV mode with the official Nintendo Switch 2 dock, and a direc
 
 ## Downloads and documentation
 
-- [v0.1.0-rc.1 Release](https://github.com/elemonic/hid-remapper/releases/tag/switch2-g600-v0.1.0-rc.1)
+- [v0.1.0-rc.1 Release](https://github.com/elemonic/g600-switch2-hid-remapper/releases/tag/switch2-g600-v0.1.0-rc.1)
 - [Japanese setup guide](START_HERE.ja.md)
 - [Technical notes and build instructions](SWITCH2_G600.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
