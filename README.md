@@ -29,9 +29,15 @@ Adafruit Feather RP2040 with USB Type A HostとG600を使った短時間の実�
 
 ## 本家プロジェクトとの関係
 
-このリポジトリは、[jfedor2/hid-remapper](https://github.com/jfedor2/hid-remapper)の`r2026-05-25`を基準にしたforkです。Switch 2とG600向けの変更や配布物に関する責任は、このfork側にあります。
+このリポジトリは、[jfedor2/hid-remapper](https://github.com/jfedor2/hid-remapper)の`r2026-05-25`を基準にしたforkです。Switch 2とG600向けの変更や配布物は、このforkで本家とは独立して管理しており、本家のサポート対象外です。
 
 本家HID Remapperの通常版、対応ハードウェア、設定方法については、[remapper.org](https://www.remapper.org/)と[本家リポジトリ](https://github.com/jfedor2/hid-remapper)を参照してください。
+
+## 免責
+
+このプロジェクトのソースコード、ファームウェア、文書は、すべて現状有姿（AS IS）で公開します。動作、互換性、安全性、継続利用を保証しません。利用するかどうかは、ご自身で判断してください。
+
+適用法令で認められる範囲において、作者およびコントリビューターは、Switch 2、G600、Feather、そのほかの機器の故障や不具合、データの消失・破損、利用できなかったことによる損失、そのほか本プロジェクトの利用または利用不能から生じた直接・間接の損害を補償しません。更新、修正、個別サポートを継続する義務も負いません。正式なライセンス条件は[MIT License](LICENSE)を確認してください。
 
 ## ライセンス
 
