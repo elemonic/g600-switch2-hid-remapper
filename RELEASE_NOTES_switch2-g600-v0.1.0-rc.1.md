@@ -6,7 +6,7 @@ This firmware exposes mouse, keyboard, and HID Remapper configuration/Monitor as
 
 ## Hardware test status
 
-Short Switch 2 testing confirmed pointer movement, left/right/middle click, vertical wheel, G600 F4/keypad input, and an additional keyboard through a USB hub. Extended Final Fantasy XIV gameplay testing has not yet been completed.
+Short Switch 2 testing confirmed pointer movement, left/right/middle click, vertical wheel, G600 input for function keys (F1-F12) and keypad keys, and an additional keyboard through a USB hub. Extended Final Fantasy XIV gameplay testing has not yet been completed.
 
 ## Assets
 
@@ -26,6 +26,6 @@ Adafruit Feather RP2040 with USB Type A Host向けの、非公式・実験的な
 
 Mouse、Keyboard、HID Remapper設定／Monitorを別々のHIDインターフェースとして提示し、G600のマウス入力とキーボード形式のボタン入力をSwitch 2へ同時に通します。
 
-短時間のSwitch 2試験では、カーソル、左右・中央クリック、縦ホイール、G600のF4／テンキー入力、USBハブ上の別キーボードが動作しました。FF14での長時間試験は未実施です。
+短時間のSwitch 2試験では、カーソル、左右・中央クリック、縦ホイール、G600のファンクションキー（F1～F12）／テンキー入力、USBハブ上の別キーボードが動作しました。FF14での長時間試験は未実施です。
 
 書き込み前に[日本語ガイド](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md)を確認してください。

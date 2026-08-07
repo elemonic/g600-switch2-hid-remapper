@@ -18,7 +18,7 @@ Short hardware testing with a Logitech G600 and an Adafruit Feather RP2040 with 
 - pointer movement
 - left, right, and middle click
 - vertical wheel
-- G600 keyboard input, including F4 and keypad keys
+- G600 keyboard input, including function keys (F1-F12) and keypad keys
 
 Extended gameplay, TV mode with the official Nintendo Switch 2 dock, and a direct connection to the console's top USB-C port have not been tested. See the [installation and technical guide](SWITCH2_G600.md) for the tested scope and limitations.
 

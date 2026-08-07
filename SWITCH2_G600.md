@@ -25,7 +25,7 @@ Short hardware testing on Switch 2 confirmed all of the following at the same ti
 - pointer movement
 - left, right, and middle click
 - vertical wheel
-- G600 buttons that produce keyboard keys, including F4 and keypad keys
+- G600 buttons that produce keyboard keys, including function keys (F1-F12) and keypad keys
 
 The test lasted only a few minutes. Extended Final Fantasy XIV gameplay testing, suspend/resume testing, and exhaustive hot-plug testing have not been completed yet. The WebHID configuration interface is retained but has not yet been tested on hardware with this variant.
 

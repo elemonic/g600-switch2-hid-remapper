@@ -84,7 +84,7 @@ body:
     id: expected
     attributes:
       label: 期待した動作
-      placeholder: 例：サイドボタンに保存したF4が入力される
+      placeholder: 例：サイドボタンに保存したファンクションキーが入力される
     validations:
       required: true
 
