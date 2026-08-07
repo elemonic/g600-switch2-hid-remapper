@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #define CONFIG_SIZE 32
+#define CONFIG_REPORT_DESCRIPTOR_LEN 33
 #define RESOLUTION_MULTIPLIER 120
 
 #define REPORT_ID_LEDS 98
@@ -14,6 +15,26 @@
 #define MAX_INPUT_REPORT_ID 3
 
 #define NOUR_DESCRIPTORS 6
+
+#if defined(SWITCH2_MOUSE_ONLY) || defined(SWITCH2_SPLIT_HID)
+#define SWITCH2_MOUSE_REPORT_DESC_LEN 52
+extern const uint8_t our_report_descriptor_switch2_mouse_only[];
+#endif
+
+#ifdef SWITCH2_SPLIT_HID
+#define SWITCH2_BOOT_KEYBOARD_REPORT_DESC_LEN 61
+#ifdef SWITCH2_KEYBOARD_FIRST
+#define SWITCH2_KEYBOARD_ITF 0
+#define SWITCH2_MOUSE_ITF 1
+#else
+#define SWITCH2_MOUSE_ITF 0
+#define SWITCH2_KEYBOARD_ITF 1
+#endif
+#define SWITCH2_CONFIG_ITF 2
+
+extern const uint8_t REPORT_ID_MOUSE;
+extern const uint8_t REPORT_ID_KEYBOARD;
+#endif
 
 typedef void (*device_connected_t)(uint16_t interface, uint16_t vid, uint16_t pid);
 typedef void (*device_disconnected_t)(uint8_t dev_addr);

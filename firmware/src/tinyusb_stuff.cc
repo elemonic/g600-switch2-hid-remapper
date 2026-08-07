@@ -57,6 +57,24 @@ tusb_desc_device_t desc_device = {
     .bNumConfigurations = 0x01,
 };
 
+#ifdef SWITCH2_MOUSE_ONLY
+extern const uint8_t configuration_descriptor_switch2_mouse_only[] = {
+    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUD_CONFIG_DESC_LEN + TUD_HID_DESC_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+    TUD_HID_DESCRIPTOR(0, 0, HID_ITF_PROTOCOL_MOUSE, SWITCH2_MOUSE_REPORT_DESC_LEN, 0x81, CFG_TUD_HID_EP_BUFSIZE, 1),
+};
+#elif defined(SWITCH2_SPLIT_HID)
+extern const uint8_t configuration_descriptor_switch2_split[] = {
+    TUD_CONFIG_DESCRIPTOR(1, 3, 0, TUD_CONFIG_DESC_LEN + 3 * TUD_HID_DESC_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+#ifdef SWITCH2_KEYBOARD_FIRST
+    TUD_HID_DESCRIPTOR(SWITCH2_KEYBOARD_ITF, 0, HID_ITF_PROTOCOL_KEYBOARD, SWITCH2_BOOT_KEYBOARD_REPORT_DESC_LEN, 0x81, CFG_TUD_HID_EP_BUFSIZE, 1),
+    TUD_HID_DESCRIPTOR(SWITCH2_MOUSE_ITF, 0, HID_ITF_PROTOCOL_MOUSE, SWITCH2_MOUSE_REPORT_DESC_LEN, 0x82, CFG_TUD_HID_EP_BUFSIZE, 1),
+#else
+    TUD_HID_DESCRIPTOR(SWITCH2_MOUSE_ITF, 0, HID_ITF_PROTOCOL_MOUSE, SWITCH2_MOUSE_REPORT_DESC_LEN, 0x81, CFG_TUD_HID_EP_BUFSIZE, 1),
+    TUD_HID_DESCRIPTOR(SWITCH2_KEYBOARD_ITF, 0, HID_ITF_PROTOCOL_KEYBOARD, SWITCH2_BOOT_KEYBOARD_REPORT_DESC_LEN, 0x82, CFG_TUD_HID_EP_BUFSIZE, 1),
+#endif
+    TUD_HID_DESCRIPTOR(SWITCH2_CONFIG_ITF, 0, HID_ITF_PROTOCOL_NONE, CONFIG_REPORT_DESCRIPTOR_LEN, 0x83, CFG_TUD_HID_EP_BUFSIZE, 1),
+};
+#else
 const uint8_t configuration_descriptor0[] = {
     TUD_CONFIG_DESCRIPTOR(1, 2, 0, TUD_CONFIG_DESC_LEN + TUD_HID_DESC_LEN + TUD_HID_DESC_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
     TUD_HID_DESCRIPTOR(0, 0, HID_ITF_PROTOCOL_KEYBOARD, our_descriptors[0].descriptor_length, 0x81, CFG_TUD_HID_EP_BUFSIZE, 1),
@@ -101,6 +119,7 @@ const uint8_t* configuration_descriptors[] = {
     configuration_descriptor4,
     configuration_descriptor5,
 };
+#endif
 
 char const* string_desc_arr[] = {
     (const char[]){ 0x09, 0x04 },  // 0: is supported language is English (0x0409)
@@ -109,7 +128,15 @@ char const* string_desc_arr[] = {
 #else
     "RP2040",  // 1: Manufacturer
 #endif
+#ifdef SWITCH2_MOUSE_ONLY
+    "Switch2 Mouse XXXX",  // 2: Product
+#elif defined(SWITCH2_KEYBOARD_FIRST)
+    "Switch2 KFirst XXXX",  // 2: Product
+#elif defined(SWITCH2_SPLIT_HID)
+    "Switch2 MFirst XXXX",  // 2: Product
+#else
     "HID Remapper XXXX",  // 2: Product
+#endif
     "123456789012",       // 3: Serial Number
 };
 
@@ -127,18 +154,38 @@ uint8_t const* tud_descriptor_device_cb() {
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
 uint8_t const* tud_descriptor_configuration_cb(uint8_t index) {
+#ifdef SWITCH2_MOUSE_ONLY
+    return configuration_descriptor_switch2_mouse_only;
+#elif defined(SWITCH2_SPLIT_HID)
+    return configuration_descriptor_switch2_split;
+#else
     return configuration_descriptors[our_descriptor->idx];
+#endif
 }
 
 // Invoked when received GET HID REPORT DESCRIPTOR
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
 uint8_t const* tud_hid_descriptor_report_cb(uint8_t itf) {
+#ifdef SWITCH2_MOUSE_ONLY
+    if (itf == 0) {
+        return our_descriptor->descriptor;
+    }
+#elif defined(SWITCH2_SPLIT_HID)
+    if (itf == SWITCH2_MOUSE_ITF) {
+        return our_report_descriptor_switch2_mouse_only;
+    } else if (itf == SWITCH2_KEYBOARD_ITF) {
+        return boot_kb_report_descriptor;
+    } else if (itf == SWITCH2_CONFIG_ITF) {
+        return config_report_descriptor;
+    }
+#else
     if (itf == 0) {
         return our_descriptor->descriptor;
     } else if (itf == 1) {
         return config_report_descriptor;
     }
+#endif
 
     return NULL;
 }
@@ -196,29 +243,53 @@ uint16_t const* tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
 }
 
 uint16_t tud_hid_get_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen) {
-    if (itf == 0) {
-        return handle_get_report0(report_id, buffer, reqlen);
-    } else {
+#ifdef SWITCH2_SPLIT_HID
+    if (itf == SWITCH2_CONFIG_ITF) {
         return handle_get_report1(report_id, buffer, reqlen);
     }
+    return 0;
+#else
+    if (itf == 0) {
+        return handle_get_report0(report_id, buffer, reqlen);
+    }
+#ifndef SWITCH2_MOUSE_ONLY
+    else {
+        return handle_get_report1(report_id, buffer, reqlen);
+    }
+#endif
+    return 0;
+#endif
 }
 
 void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize) {
+#ifdef SWITCH2_SPLIT_HID
+    if (itf == SWITCH2_KEYBOARD_ITF) {
+        handle_set_report0(REPORT_ID_LEDS, buffer, bufsize);
+    } else if (itf == SWITCH2_CONFIG_ITF) {
+        handle_set_report1(report_id, buffer, bufsize);
+    }
+#else
     if (itf == 0) {
         if ((report_id == 0) && (report_type == 0) && (bufsize > 0)) {
             report_id = buffer[0];
             buffer++;
         }
         handle_set_report0(report_id, buffer, bufsize);
-    } else {
+    }
+#ifndef SWITCH2_MOUSE_ONLY
+    else {
         handle_set_report1(report_id, buffer, bufsize);
     }
+#endif
+#endif
 }
 
 void tud_hid_set_protocol_cb(uint8_t instance, uint8_t protocol) {
     printf("tud_hid_set_protocol_cb %d %d\n", instance, protocol);
+#if !defined(SWITCH2_MOUSE_ONLY) && !defined(SWITCH2_SPLIT_HID)
     boot_protocol_keyboard = (protocol == HID_PROTOCOL_BOOT);
     boot_protocol_updated = true;
+#endif
 }
 
 void tud_mount_cb() {

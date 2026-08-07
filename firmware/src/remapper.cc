@@ -732,7 +732,13 @@ void aggregate_relative(uint8_t* prev_report, const uint8_t* report, uint8_t rep
                     }
                 }
 
-                put_bits(prev_report, report_sizes[report_id], usage_def.bitpos, usage_def.size, val1 + val2);
+                int32_t combined = val1 + val2;
+#if defined(SWITCH2_MOUSE_ONLY) || defined(SWITCH2_SPLIT_HID)
+                // The diagnostic descriptor uses signed 8-bit mouse axes.
+                // Saturate coalesced reports instead of wrapping direction.
+                combined = std::clamp(combined, usage_def.logical_minimum, usage_def.logical_maximum);
+#endif
+                put_bits(prev_report, report_sizes[report_id], usage_def.bitpos, usage_def.size, combined);
             }
         }
     }
@@ -1385,10 +1391,19 @@ void process_mapping(bool auto_repeat) {
             }
         }
         int32_t truncated = accumulated_val / 1000;
+#if defined(SWITCH2_MOUSE_ONLY) || defined(SWITCH2_SPLIT_HID)
+        int32_t output_value = std::clamp(existing_val + truncated, our_usage.logical_minimum, our_usage.logical_maximum);
+        // Keep movement that did not fit in this 8-bit report for a later frame.
+        accumulated_val -= (output_value - existing_val) * 1000;
+        if (output_value != existing_val) {
+            put_bits((uint8_t*) reports[our_usage.report_id], report_sizes[our_usage.report_id], our_usage.bitpos, our_usage.size, output_value);
+        }
+#else
         accumulated_val -= truncated * 1000;
         if (truncated != 0) {
             put_bits((uint8_t*) reports[our_usage.report_id], report_sizes[our_usage.report_id], our_usage.bitpos, our_usage.size, existing_val + truncated);
         }
+#endif
     }
 
     for (unsigned int i = 0; i < report_ids.size(); i++) {  // XXX what order should we go in? maybe keyboard first so that mappings to ctrl-left click work as expected?
@@ -1438,6 +1453,27 @@ bool send_report(send_report_t do_send_report) {
         return false;
     }
 
+#ifdef SWITCH2_SPLIT_HID
+    // Mouse and keyboard have independent endpoints. Scan the short queue so
+    // a busy endpoint cannot prevent a ready interface from making progress.
+    for (uint8_t offset = 0; offset < or_items; offset++) {
+        uint8_t idx = (or_head + offset) % OR_BUFSIZE;
+        uint8_t report_id = outgoing_reports[idx][0];
+        if ((our_descriptor == &our_descriptors[our_descriptor_number]) &&
+            do_send_report(0, outgoing_reports[idx], report_sizes[report_id] + 1)) {
+            for (uint8_t shift = offset; shift + 1 < or_items; shift++) {
+                uint8_t to = (or_head + shift) % OR_BUFSIZE;
+                uint8_t from = (or_head + shift + 1) % OR_BUFSIZE;
+                memcpy(outgoing_reports[to], outgoing_reports[from], sizeof(outgoing_reports[to]));
+            }
+            or_tail = (or_tail + OR_BUFSIZE - 1) % OR_BUFSIZE;
+            or_items--;
+            reports_sent++;
+            return true;
+        }
+    }
+    return false;
+#else
     uint8_t report_id = outgoing_reports[or_head][0];
 
     bool sent = false;
@@ -1452,6 +1488,7 @@ bool send_report(send_report_t do_send_report) {
     reports_sent++;
 
     return sent;
+#endif
 }
 
 bool send_monitor_report(send_report_t do_send_report) {
@@ -1459,7 +1496,13 @@ bool send_monitor_report(send_report_t do_send_report) {
         return false;
     }
 
-    bool sent = do_send_report(1, (uint8_t*) &monitor_report[monitor_report_idx], sizeof(monitor_report_t));
+    bool sent = do_send_report(
+#ifdef SWITCH2_SPLIT_HID
+        SWITCH2_CONFIG_ITF,
+#else
+        1,
+#endif
+        (uint8_t*) &monitor_report[monitor_report_idx], sizeof(monitor_report_t));
 
     monitor_report_idx = (monitor_report_idx + 1) % 2;
     memset(&(monitor_report[monitor_report_idx].items), 0, sizeof(monitor_report[0].items));

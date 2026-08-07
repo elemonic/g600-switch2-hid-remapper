@@ -8,7 +8,13 @@
 
 #define CFG_TUD_ENDPOINT0_SIZE 64
 
+#ifdef SWITCH2_MOUSE_ONLY
+#define CFG_TUD_HID 1
+#elif defined(SWITCH2_SPLIT_HID)
+#define CFG_TUD_HID 3
+#else
 #define CFG_TUD_HID 2
+#endif
 #define CFG_TUD_CDC 0
 #define CFG_TUD_MSC 0
 #define CFG_TUD_MIDI 0

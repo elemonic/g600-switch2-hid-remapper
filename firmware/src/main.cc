@@ -72,11 +72,26 @@ void __no_inline_not_in_flash_func(sof_handler)(uint32_t frame_count) {
 }
 
 bool do_send_report(uint8_t interface, const uint8_t* report_with_id, uint8_t len) {
+#ifdef SWITCH2_SPLIT_HID
+    uint8_t report_id = report_with_id[0];
+    bool split_input_report = (report_id == REPORT_ID_MOUSE) || (report_id == REPORT_ID_KEYBOARD);
+    if (split_input_report) {
+        interface = (report_id == REPORT_ID_MOUSE) ? SWITCH2_MOUSE_ITF : SWITCH2_KEYBOARD_ITF;
+        if (!tud_suspended() && !tud_hid_n_ready(interface)) {
+            return false;
+        }
+    }
+#endif
     if (tud_suspended() &&
         (our_descriptor->should_cause_wakeup != nullptr) &&
         our_descriptor->should_cause_wakeup(report_with_id[0], report_with_id + 1, len - 1)) {
         tud_remote_wakeup();
     } else {
+#ifdef SWITCH2_SPLIT_HID
+        if (split_input_report) {
+            return tud_hid_n_report(interface, 0, report_with_id + 1, len - 1);
+        }
+#endif
         tud_hid_n_report(interface, report_with_id[0], report_with_id + 1, len - 1);
     }
     return true;  // XXX?
@@ -248,6 +263,11 @@ int main() {
 #endif
     tick_init();
     load_config(FLASH_CONFIG_IN_MEMORY);
+#if defined(SWITCH2_MOUSE_ONLY) || defined(SWITCH2_SPLIT_HID)
+    // Switch 2 builds use fixed USB descriptors even if flash contains a
+    // configuration that selected one of the gamepad descriptors.
+    our_descriptor_number = 0;
+#endif
     our_descriptor = &our_descriptors[our_descriptor_number];
     parse_our_descriptor();
     set_mapping_from_config();
@@ -303,12 +323,21 @@ int main() {
             set_gpio_dir();
             set_gpio_dir_pending = false;
         }
+#ifdef SWITCH2_SPLIT_HID
+        send_report(do_send_report);
+        if (monitor_enabled && tud_hid_n_ready(SWITCH2_CONFIG_ITF)) {
+            send_monitor_report(do_send_report);
+        }
+#else
         if (tud_hid_n_ready(0) || tud_suspended()) {
             send_report(do_send_report);
         }
+#ifndef SWITCH2_MOUSE_ONLY
         if (monitor_enabled && tud_hid_n_ready(1)) {
             send_monitor_report(do_send_report);
         }
+#endif
+#endif
         if (our_descriptor->main_loop_task != nullptr) {
             our_descriptor->main_loop_task();
         }

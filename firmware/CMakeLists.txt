@@ -1,5 +1,26 @@
 cmake_minimum_required(VERSION 3.13)
 
+option(SWITCH2_MOUSE_ONLY "Expose only a boot-protocol USB mouse" OFF)
+option(SWITCH2_SPLIT_HID "Expose separate mouse, keyboard, and config HID interfaces" OFF)
+option(SWITCH2_KEYBOARD_FIRST "Put the keyboard before the mouse in split HID mode" OFF)
+
+if(SWITCH2_MOUSE_ONLY AND SWITCH2_SPLIT_HID)
+message(FATAL_ERROR "SWITCH2_MOUSE_ONLY and SWITCH2_SPLIT_HID cannot both be enabled")
+endif()
+if(SWITCH2_KEYBOARD_FIRST AND NOT SWITCH2_SPLIT_HID)
+message(FATAL_ERROR "SWITCH2_KEYBOARD_FIRST requires SWITCH2_SPLIT_HID")
+endif()
+
+if(SWITCH2_MOUSE_ONLY)
+add_compile_definitions(SWITCH2_MOUSE_ONLY=1)
+endif()
+if(SWITCH2_SPLIT_HID)
+add_compile_definitions(SWITCH2_SPLIT_HID=1)
+if(SWITCH2_KEYBOARD_FIRST)
+add_compile_definitions(SWITCH2_KEYBOARD_FIRST=1)
+endif()
+endif()
+
 add_subdirectory(usb_midi_host)
 
 add_compile_definitions(PICO_DEFAULT_UART_BAUD_RATE=921600)

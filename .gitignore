@@ -1,3 +1,8 @@
 config-tool/__pycache__
 firmware-bluetooth/build
 firmware/build
+firmware/build-feather-baseline
+firmware/build-feather-mouse-only
+firmware/build-feather-split-*
+.tooling/
+scripts/__pycache__/
