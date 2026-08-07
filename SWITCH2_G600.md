@@ -51,8 +51,6 @@ Download `remapper_feather_switch2_g600.uf2` from this fork's [Releases page](ht
 
 No mapping backup is needed when the HID Remapper configuration is empty. If you have custom mappings, export them before flashing.
 
-To restore the official firmware, download `remapper_feather.uf2` from the upstream [r2026-05-25 release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25) and flash it with the same BOOT/RESET procedure.
-
 ## Building from source
 
 GitHub-generated source ZIP and TAR archives do not contain submodule contents. Clone with submodules instead:

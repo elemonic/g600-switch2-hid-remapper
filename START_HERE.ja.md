@@ -111,14 +111,12 @@ Switch 2上ではLogitechの設定ソフトが動きません。G600のボタン
 
 オンボードメモリについては、[Logicool公式サポート](https://support.logi.com/hc/ja/articles/360023411353)も参照してください。
 
-## うまく動かないとき・公式版へ戻す
+## うまく動かないとき
 
 - `RPI-RP2`が出ない：充電専用ではなく、データ通信対応ケーブルか確認します。`BOOT`を押したまま`RESET`を押し、ドライブが出るまで`BOOT`を押し続けます。
 - Featherの電源は入るがSwitch 2で反応しない：ケーブルがデータ通信対応か、UF2のファイル名、各コネクターが奥まで挿さっているかを確認します。一度すべて外してからつなぎ直します。
 - マウスは動くがサイドボタンが想定と違う：G600のオンボードメモリに保存された割り当てをPCで確認します。
 - 別のマウスや基板で動かない：今回の実機確認対象はG600とFeather RP2040 USB Hostだけです。
-
-本家HID Remapperの[r2026-05-25 Release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25)から`remapper_feather.uf2`をダウンロードし、同じBOOT／RESET手順で書き込みます。
 
 詳しい動作確認範囲、既知の制限、USBの構成は[技術情報](SWITCH2_G600.ja.md)にまとめています。
 

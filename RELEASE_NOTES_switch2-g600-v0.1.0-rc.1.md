@@ -16,8 +16,6 @@ Short Switch 2 testing confirmed pointer movement, left/right/middle click, vert
 
 See the [English guide](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.md) or [Japanese guide](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/SWITCH2_G600.ja.md) before flashing.
 
-To restore official firmware, use `remapper_feather.uf2` from the upstream [r2026-05-25 release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25).
-
 ---
 
 # Switch 2＋Logitech G600用ファームウェア v0.1.0-rc.1

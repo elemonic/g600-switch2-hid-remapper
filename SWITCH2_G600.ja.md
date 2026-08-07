@@ -53,8 +53,6 @@ Keyboard優先版は診断用です。Mouse優先版で両方の入力が通っ�
 
 HID Remapperの設定が空なら、事前のマッピング保存は不要です。独自マッピングがある場合は、書き込み前にエクスポートしてください。
 
-公式版へ戻す場合は、本家の[r2026-05-25 Release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25)から`remapper_feather.uf2`を取得し、同じBOOT／RESET手順で書き込みます。
-
 ## ソースからのビルド
 
 GitHubが自動生成するSource ZIP／TARにはサブモジュールの中身が入りません。次のようにサブモジュール込みでcloneしてください。
