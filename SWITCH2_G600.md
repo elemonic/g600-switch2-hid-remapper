@@ -26,9 +26,6 @@ Short hardware testing on Switch 2 confirmed all of the following at the same ti
 - left, right, and middle click
 - vertical wheel
 - G600 buttons that produce keyboard keys, including F4 and keypad keys
-- another keyboard connected through a USB hub
-
-The tested path used a third-party dock-like adapter connected to the bottom USB-C port of the Switch 2. The Feather USB-C port was connected to a USB-A port on that adapter with a USB-A-to-USB-C cable. Short tests covered both a direct connection to the adapter and a connection with a USB hub in between. The official Nintendo Switch 2 dock and a direct connection to the console's top USB-C port have not been tested.
 
 The test lasted only a few minutes. Extended Final Fantasy XIV gameplay testing, suspend/resume testing, and exhaustive hot-plug testing have not been completed yet. The WebHID configuration interface is retained but has not yet been tested on hardware with this variant.
 
