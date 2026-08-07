@@ -64,7 +64,7 @@ Linuxでは次を実行します。
 sha256sum remapper_feather_switch2_g600.uf2
 ```
 
-Releaseにある`SHA256SUMS.txt`でも同じ値を確認できます。ソースを読んだり自分でビルドしたりする場合は、[この版のソースとビルド手順](https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600-v0.1.0-rc.1/SWITCH2_G600.ja.md#ソースからのビルド)へ進んでください。
+Releaseにある`SHA256SUMS.txt`でも同じ値を確認できます。ソースを読んだり自分でビルドしたりする場合は、[ソースとビルド手順](SWITCH2_G600.ja.md#ソースからのビルド)へ進んでください。
 
 </details>
 
