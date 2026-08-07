@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 導入ガイドを確認する
+    url: https://github.com/elemonic/g600-switch2-hid-remapper/blob/switch2-g600/START_HERE.ja.md
+    about: 購入前の注意、書き込み、接続方法、既知の制限はこちらです。

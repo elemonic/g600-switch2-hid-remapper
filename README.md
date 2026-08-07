@@ -24,6 +24,10 @@ Adafruit Feather RP2040 with USB Type A HostとG600を使った短時間の実�
 
 長時間プレイ、純正Nintendo Switch 2ドックでのTVモード、本体上部USB-Cへの直結などは未確認です。対応範囲と注意点は[導入ガイド](START_HERE.ja.md)を確認してください。
 
+## 不具合を見つけた場合
+
+この派生版で再現する不具合は、[不具合報告フォーム](https://github.com/elemonic/g600-switch2-hid-remapper/issues/new?template=bug_report.yml)から知らせてください。個人の趣味プロジェクトのため、返信、調査、修正は約束できません。この派生版で起きた問題を、本家HID Remapperへ報告しないでください。
+
 ## ダウンロードと技術情報
 
 - [v0.1.0-rc.1 Release](https://github.com/elemonic/g600-switch2-hid-remapper/releases/tag/switch2-g600-v0.1.0-rc.1)

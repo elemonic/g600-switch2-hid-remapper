@@ -1,0 +1,101 @@
+name: 不具合報告
+description: Switch 2とG600向けのこの派生版で起きた不具合を報告します
+title: "[不具合] "
+labels:
+  - bug
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        報告ありがとうございます。このリポジトリは個人の趣味プロジェクトです。内容は確認しますが、返信、調査、修正、継続対応は保証できません。
+
+        この派生版で起きた問題は、本家HID Remapperではなく、こちらへ報告してください。
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: 報告前の確認
+      options:
+        - label: 導入ガイドと既存のIssueを確認しました
+          required: true
+        - label: この派生版で起きた問題であり、本家HID Remapperへ報告する内容ではないことを確認しました
+          required: true
+        - label: 返信や修正が保証されないことを確認しました
+          required: true
+
+  - type: dropdown
+    id: firmware
+    attributes:
+      label: 使用したファームウェア
+      description: 分からない場合は「不明」を選んでください。
+      options:
+        - switch2-g600-v0.1.0-rc.1
+        - switch2-g600ブランチを自分でビルド
+        - そのほかの版を自分でビルド
+        - 不明
+    validations:
+      required: true
+
+  - type: textarea
+    id: hardware
+    attributes:
+      label: 使用機器と接続方法
+      description: 製品名が分からないものは「不明」で構いません。
+      value: |
+        - マウス: Logitech G600
+        - 基板: Adafruit Feather RP2040 with USB Type A Host
+        - Switch 2との接続方法:
+        - ドック／変換アダプター:
+        - USBハブ:
+        - USBケーブル:
+    validations:
+      required: true
+
+  - type: input
+    id: switch_version
+    attributes:
+      label: Switch 2のシステムバージョン
+      description: 分かる場合だけ記入してください。
+      placeholder: 本体設定に表示されている番号
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 起きたこと
+      description: どの画面やゲームで、何が動いて何が動かなかったかを書いてください。
+      placeholder: 例：カーソルとクリックは動くが、G600のサイドボタンだけ反応しない
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 再現手順
+      description: 同じ状態を再現できる手順を、分かる範囲で書いてください。
+      placeholder: |
+        1. G600をFeatherへ接続する
+        2. FeatherをSwitch 2へ接続する
+        3. FF14を起動してサイドボタンを押す
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待した動作
+      placeholder: 例：サイドボタンに保存したF4が入力される
+    validations:
+      required: true
+
+  - type: textarea
+    id: mapping
+    attributes:
+      label: G600のボタン設定
+      description: オンボードメモリへ保存したキーや、独自のHID Remapper設定がある場合に記入してください。
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足
+      description: 写真、動画、設定JSONなどがあれば添付できます。公開して問題のない情報だけを載せてください。
