@@ -1,5 +1,8 @@
 # HID Remapper
 
+> [!IMPORTANT]
+> This `switch2-g600` branch contains an unofficial, experimental firmware variant for using a Logitech G600 through an Adafruit Feather RP2040 USB Host with Nintendo Switch 2. See [Switch 2 + G600 firmware](SWITCH2_G600.md) or the [Japanese guide](SWITCH2_G600.ja.md). It is not an official release from the upstream HID Remapper project, Nintendo, Logitech, or Adafruit.
+
 _For user documentation please see the project's website at [remapper.org](https://www.remapper.org/)._
 
 This is a configurable USB dongle that allows you to remap inputs from mice, keyboards and other devices. It works completely in hardware and requires no software running on the computer during normal use.

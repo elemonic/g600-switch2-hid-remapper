@@ -1,0 +1,56 @@
+name: build-switch2-g600
+
+on:
+  push:
+    branches:
+      - switch2-g600
+    paths:
+      - '.github/workflows/build-switch2-g600.yml'
+      - 'firmware/**'
+      - 'scripts/validate_switch2_mouse_only.py'
+      - 'scripts/validate_switch2_split_elf.py'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -x -e -o pipefail {0}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Install compiler, libraries and tools
+        run: |
+          sudo apt update
+          sudo apt install -y --no-install-recommends \
+            gcc-arm-none-eabi libnewlib-arm-none-eabi \
+            libstdc++-arm-none-eabi-newlib srecord
+      - name: Build recommended mouse-first firmware
+        run: |
+          cmake -S firmware -B firmware/build-switch2-g600 \
+            -DPICO_BOARD=feather_host \
+            -DSWITCH2_SPLIT_HID=ON
+          cmake --build firmware/build-switch2-g600 \
+            --target remapper --parallel 4
+      - name: Validate compiled USB descriptors
+        run: |
+          python3 scripts/validate_switch2_split_elf.py \
+            firmware/build-switch2-g600/remapper.elf \
+            --order mouse-first
+      - name: Package artifact
+        run: |
+          mkdir dist
+          cp firmware/build-switch2-g600/remapper.uf2 \
+            dist/remapper_feather_switch2_g600.uf2
+          cd dist
+          sha256sum remapper_feather_switch2_g600.uf2 > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: switch2-g600-firmware
+          path: dist/*
