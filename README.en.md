@@ -2,12 +2,14 @@
 
 [日本語](README.md)
 
-This is an unofficial HID Remapper firmware variant for passing Logitech G600 mouse input and keyboard-style side-button input to FINAL FANTASY XIV on Nintendo Switch 2 at the same time.
+This unofficial HID Remapper firmware variant uses an [Adafruit Feather RP2040 with USB Type A Host](https://www.adafruit.com/product/5723) to make both Logitech G600 mouse input and side-button keyboard input available in FINAL FANTASY XIV on Nintendo Switch 2.
 
 ## [Installation and technical guide](SWITCH2_G600.md)
 
 > [!CAUTION]
 > This is an experimental personal project. It is not provided or endorsed by Nintendo, Square Enix, Logitech, Adafruit, or the upstream HID Remapper project.
+>
+> Operation is not guaranteed. Updates to Nintendo Switch 2 or FINAL FANTASY XIV may make this firmware stop working; conversely, future updates may make this firmware unnecessary.
 >
 > Do not report problems with this variant to the upstream HID Remapper project.
 
@@ -21,6 +23,10 @@ Short hardware testing with a Logitech G600 and an Adafruit Feather RP2040 with 
 - G600 keyboard input, including function keys (F1-F12) and keypad keys
 
 Extended gameplay, TV mode with the official Nintendo Switch 2 dock, and a direct connection to the console's top USB-C port have not been tested. See the [installation and technical guide](SWITCH2_G600.md) for the tested scope and limitations.
+
+## Reporting a problem
+
+If a problem is reproducible with this variant, please use the [bug report form](https://github.com/elemonic/g600-switch2-hid-remapper/issues/new?template=bug_report.yml) to let us know. The form is currently in Japanese. Because this is a personal hobby project, no response, investigation, or fix is guaranteed. Do not report problems with this variant to the upstream HID Remapper project.
 
 ## Downloads and documentation
 
