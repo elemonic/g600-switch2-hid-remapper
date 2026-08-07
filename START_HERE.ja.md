@@ -8,6 +8,8 @@ G600をSwitch 2版FF14で使いたくて、個人が趣味で少し手を入れ�
 > これは非公式の実験的な方法です。Nintendo、スクウェア・エニックス、Logitech、Adafruit、本家HID Remapperとは関係ありません。
 >
 > 突然使えなくなる、最初から環境によっては動かない、公式の更新によってこの基板自体が不要になる、といった可能性があります。購入費用、故障、データ損失、そのほか使用によって生じた損害の責任は負えません。
+>
+> この派生版で起きた問題を、本家HID Remapperへ報告しないでください。
 
 このページへのリンクや、実際に試した結果の共有は歓迎します。ただし、注意書きを省いて商品リンクだけ並べ、「これを買えば必ず動く」と誘導するアフィリエイト記事への利用はご遠慮ください。そういう目的の方は、ここでお帰りください。
 
@@ -31,7 +33,7 @@ G600をSwitch 2版FF14で使いたくて、個人が趣味で少し手を入れ�
 
 ## 1. ファームウェアをダウンロードする
 
-[`remapper_feather_switch2_g600.uf2`をダウンロード](https://github.com/elemonic/hid-remapper/releases/download/switch2-g600-v0.1.0-rc.1/remapper_feather_switch2_g600.uf2)
+[`remapper_feather_switch2_g600.uf2`](https://github.com/elemonic/hid-remapper/releases/download/switch2-g600-v0.1.0-rc.1/remapper_feather_switch2_g600.uf2) をダウンロード
 
 <details>
 <summary>ハッシュの確認、ソースの確認・ビルド</summary>
@@ -101,17 +103,13 @@ Nintendo Switch 2 本体下部のUSB-C端子
 
 TVモードは、適合するHDMIケーブルが手元にないため未確認です。[^hdmi]
 
-<details>
-<summary>G600のサイドボタンを変更したい場合</summary>
+## G600のサイドボタンを変更したい場合
 
 Switch 2上ではLogitechの設定ソフトが動きません。G600のボタン割り当てを変える場合は、先にPCで設定し、G600の**オンボードメモリ**へ保存してください。PC上のゲームを検出して切り替わるプロファイルは、Switch 2へ持っていけません。
 
 オンボードメモリについては、[Logicool公式サポート](https://support.logi.com/hc/ja/articles/360023411353)も参照してください。
 
-</details>
-
-<details>
-<summary>うまく動かないとき・公式版へ戻す</summary>
+## うまく動かないとき・公式版へ戻す
 
 - `RPI-RP2`が出ない：充電専用ではなく、データ通信対応ケーブルか確認します。`BOOT`を押したまま`RESET`を押し、ドライブが出るまで`BOOT`を押し続けます。
 - Featherの電源は入るがSwitch 2で反応しない：ケーブルがデータ通信対応か、UF2のファイル名、各コネクターが奥まで挿さっているかを確認します。一度すべて外してからつなぎ直します。
@@ -119,8 +117,6 @@ Switch 2上ではLogitechの設定ソフトが動きません。G600のボタン
 - 別のマウスや基板で動かない：今回の実機確認対象はG600とFeather RP2040 USB Hostだけです。
 
 本家HID Remapperの[r2026-05-25 Release](https://github.com/jfedor2/hid-remapper/releases/tag/r2026-05-25)から`remapper_feather.uf2`をダウンロードし、同じBOOT／RESET手順で書き込みます。
-
-</details>
 
 詳しい動作確認範囲、既知の制限、USBの構成は[技術情報](SWITCH2_G600.ja.md)にまとめています。
 

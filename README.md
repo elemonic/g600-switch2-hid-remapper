@@ -3,7 +3,9 @@
 > [!IMPORTANT]
 > **Nintendo Switch 2でLogitech G600を使いたい方へ：** [購入から接続までの日本語ガイド](START_HERE.ja.md)
 >
-> This `switch2-g600` branch contains an unofficial, experimental firmware variant for using a Logitech G600 through an Adafruit Feather RP2040 USB Host with Nintendo Switch 2. See the [technical notes](SWITCH2_G600.md) or [日本語の技術情報](SWITCH2_G600.ja.md). It is not an official release from Nintendo, Logitech, Square Enix, Adafruit, or the upstream HID Remapper project.
+> この派生版で起きた問題を、本家HID Remapperへ報告しないでください。
+>
+> This `switch2-g600` branch contains an unofficial, experimental firmware variant for using a Logitech G600 through an Adafruit Feather RP2040 USB Host with Nintendo Switch 2. See the [technical notes](SWITCH2_G600.md) or [日本語の技術情報](SWITCH2_G600.ja.md). It is not an official release from Nintendo, Logitech, Square Enix, Adafruit, or the upstream HID Remapper project. Please do not report problems with this variant to the upstream project.
 
 _For user documentation please see the project's website at [remapper.org](https://www.remapper.org/)._
 
