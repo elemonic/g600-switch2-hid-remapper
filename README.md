@@ -1,5 +1,7 @@
 # Logitech G600をNintendo Switch 2で使う
 
+[English](README.en.md)
+
 Logitech G600のマウス操作とサイドボタンのキー入力を、Nintendo Switch 2版FF14へ同時に送るための非公式HID Remapper派生ファームウェアです。
 
 ## [購入・書き込み・接続の手順はこちら](START_HERE.ja.md)
